@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    
+    <!-- SEO & Social Sharing (Open Graph) -->
+    <title>粉紅超跑：數位遶境</title>
+    <meta name="description" content="跟著媽祖去進香！閃避炮仗、收集供品，累積福氣值。手機網頁即點即玩！" />
+    <meta property="og:title" content="粉紅超跑：數位遶境" />
+    <meta property="og:description" content="全台瘋媽祖！立即體驗掌上進香，挑戰最高福氣積分！" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://placehold.co/1200x630/FF69B4/FFFFFF/png?text=粉紅超跑" />
+    
+    <!-- PWA Settings -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="https://placehold.co/192x192/FF69B4/FFFFFF/png?text=媽祖" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Prevent pull-to-refresh on mobile */
+      body {
+        overscroll-behavior: none;
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      /* Safe area padding utilities */
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+      .pl-safe { padding-left: env(safe-area-inset-left); }
+      .pr-safe { padding-right: env(safe-area-inset-right); }
+    </style>
+    <!-- Removed importmap as we are now using a standard bundler (Vite) setup via package.json -->
+<script type="importmap">
+{
+  "imports": {
+    "vite": "https://esm.sh/vite@^7.2.7",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-900 text-white overflow-hidden fixed inset-0">
+    <div id="root" class="w-full h-full"></div>
+    <script>
+      // Register Service Worker for PWA (Offline capability)
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('SW registered!', reg))
+            .catch(err => console.log('SW failed', err));
+        });
+      }
+    </script>
+    <!-- Vite automatically injects the script, but for clarity/dev we point to it -->
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
